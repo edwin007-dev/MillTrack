@@ -1,0 +1,126 @@
+<!-- Start Top Search -->
+<div class="top-search">
+    <div class="container">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+        </div>
+    </div>
+</div>
+<!-- End Top Search -->
+
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Mills</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Mills</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start About Page -->
+<div class="about-box-main">
+    <div class="container">
+        <form [formGroup]="millformgroup">
+            <div class="row">
+                <!-- District Selection -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="district"><strong>DISTRICT</strong></label>
+                        <select class="form-control" formControlName="district_id" (change)="getdistrictbyid()">
+                            <option value="">---Choose District---</option>
+                            <option *ngFor="let data of districtdataarray" [value]="data.district_id">
+                                {{ data.districtname }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Location Selection -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="location"><strong>LOCATION</strong></label>
+                        <select class="form-control" formControlName="location_id" (change)="getmillbyid()">
+                            <option value="">---Choose Location---</option>
+                            <option *ngFor="let data of locationdataarray" [value]="data.location_id">
+                                {{ data.locationname }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Mills List -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let data of milldataarray">
+                <div class="card">
+                    <a [routerLink]="['/customermaster/viewcustmillcategory', data.login_id]">
+                        <img class="card-img-top mill-image" 
+                             src="http://localhost:3000/images/{{ data.image }}"  
+                             alt="Mill Image" />
+                    </a>
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>{{ data.name }}</strong></h5>
+                        <p class="card-text"><i class="fa fa-phone"></i> {{ data.phone }}</p>
+                        <p class="card-text"><i class="fa fa-envelope"></i> {{ data.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End About Page -->
+
+<!-- Start Footer -->
+<div class="footer-copyright text-center py-3">
+    <p class="footer-company">All Rights Reserved. &copy; 2024 <a href="#">MillTrack</a></p>
+</div>
+<!-- End Footer -->
+
+<!-- Back to Top Button -->
+<a href="#" id="back-to-top" title="Back to top">&uarr;</a>
+
+<!-- Custom CSS -->
+<style>
+    .mill-image {
+        width: 100%;  /* Makes images responsive */
+        height: 250px; /* Fixed height for uniformity */
+        object-fit: cover; /* Ensures images maintain aspect ratio and fill */
+        border-radius: 10px; /* Smooth corners */
+    }
+    .card {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+    .card:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- ALL JS FILES -->
+<script src="/assets/customer/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/customer/js/popper.min.js"></script>
+<script src="/assets/customer/js/bootstrap.min.js"></script>
+
+<!-- ALL PLUGINS -->
+<script src="/assets/customer/js/jquery.superslides.min.js"></script>
+<script src="/assets/customer/js/bootstrap-select.js"></script>
+<script src="/assets/customer/js/inewsticker.js"></script>
+<script src="/assets/customer/js/bootsnav.js"></script>
+<script src="/assets/customer/js/images-loded.min.js"></script>
+<script src="/assets/customer/js/isotope.min.js"></script>
+<script src="/assets/customer/js/owl.carousel.min.js"></script>
+<script src="/assets/customer/js/baguetteBox.min.js"></script>
+<script src="/assets/customer/js/form-validator.min.js"></script>
+<script src="/assets/customer/js/contact-form-script.js"></script>
+<script src="/assets/customer/js/custom.js"></script> 

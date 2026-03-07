@@ -1,0 +1,30 @@
+.order-card {
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.card-header {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+.card-body {
+    padding: 15px;
+    background: #f8f9fa;
+}
+.order-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.order-item {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

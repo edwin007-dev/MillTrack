@@ -1,0 +1,58 @@
+<div class="container my-5">
+    <h2 class="text-center mb-5 text-primary fw-bold display-5">🛒 Your Shopping Cart</h2>
+
+    <!-- Cart Items -->
+    <div class="row justify-content-center" *ngIf="ProductArray.length > 0; else emptyCart">
+        <div class="col-md-4 col-sm-6 mb-4" *ngFor="let product of ProductArray">
+            <div class="card shadow-lg border-0 rounded-4 h-100">
+                <img src="http://localhost:3000/images/{{ product.image }}" 
+                     class="card-img-top product-image rounded-top-4" 
+                     alt="{{ product.productname }}" 
+                     style="height: 250px; object-fit: cover;">
+                
+                <div class="card-body d-flex flex-column justify-content-between text-center p-4">
+                    <h5 class="card-title text-dark fw-bold mb-2">{{ product.productname }}</h5>
+                    <p class="card-text text-muted small">Quantity: <span class="fw-bold">{{ product.quantity }}</span></p>
+                    <p class="card-text text-muted small">Price: ₹<span class="fw-bold">{{ product.price }}</span></p>
+                    <p class="card-text text-success fw-bold fs-5">Total: ₹{{ product.totalamount }}</p>
+
+                    <!-- Remove Button (optional) -->
+                    <!--
+                    <button (click)="removeFromCart(product.productid)" 
+                            class="btn btn-outline-danger rounded-pill py-2 mt-2">
+                        <i class="fa fa-trash"></i> Remove
+                    </button>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Cart -->
+    <ng-template #emptyCart>
+        <div class="text-center mt-5">
+            <i class="fa fa-shopping-cart text-secondary fs-1"></i>
+            <p class="text-muted mt-2 fs-5">Your cart is currently empty.</p>
+        </div>
+    </ng-template>
+
+    <!-- Total Amount & Buttons -->
+<div class="text-center mt-5">
+    <p class="fs-3 fw-bold text-success mb-4">Total Amount: ₹{{ totalamount }}</p>
+
+    <div class="d-flex justify-content-center flex-wrap">
+        <button (click)="book()" 
+                class="btn btn-success rounded-pill py-3 px-5 shadow-sm me-5">
+            <i class="fa fa-check"></i> Finish
+        </button>
+
+        <button *ngIf="showPaymentButton" 
+                (click)="proceedToPayment()" 
+                class="btn btn-primary rounded-pill py-3 px-5 shadow-sm ms-5">
+            <i class="fa fa-credit-card"></i> Proceed to Payment
+        </button>
+    </div>
+</div>
+
+
+</div>

@@ -1,0 +1,79 @@
+<!-- SERVICES SECTION -->
+<div class="services-section" style="background-color: #d6f2fe; padding: 40px 0;">
+    <div class="container">
+        <!-- SERVICES HEADING -->
+        <!-- SERVICES HEADING -->
+<h2 class="text-uppercase text-center mb-4 strong-heading">SERVICES</h2>
+
+<!-- Add this in your page <head> -->
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+<!-- Updated CSS -->
+<style>
+    .strong-heading {
+        font-family: 'Merriweather', serif; /* Classic and professional font */
+        font-weight: 700;
+        font-size: 32px; /* Slightly bigger for classy feel */
+        text-transform: uppercase;
+        letter-spacing: 2px; /* Adds a nice space between letters */
+        color: #333; /* Dark, professional color */
+    }
+</style>
+
+
+        <div class="row">
+            <div *ngFor="let category of categories" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box text-center">
+                    <img class="category-image" src="http://localhost:3000/images/{{ category.image }}" alt="{{ category.categoryname }}" />
+                    <a class="btn hvr-hover" [routerLink]="['/customermaster/viewcustmillservices', login_id, category.category_id]">
+                        {{ category.categoryname }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<div class="products-section" style="background-color: #fff8ca; padding: 40px 0;">
+    <div class="container">
+        <!-- PRODUCTS HEADING -->
+        <h2 class="text-uppercase text-center mb-4 strong-heading">PRODUCTS</h2>
+
+        <div class="row">
+            <div *ngFor="let product of products" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box text-center">
+                    <img class="category-image" src="http://localhost:3000/images/{{ product.image }}" alt="{{ product.productname }}" />
+                    <a class="btn hvr-hover" [routerLink]="['/customermaster/productsingleview', product.product_id]">
+                        {{ product.productname }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .strong-heading {
+        font-weight: 800;
+        font-size: 28px;
+        text-transform: uppercase;
+    }
+    .category-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .shop-cat-box {
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background: #fff;
+        transition: transform 0.3s ease-in-out;
+    }
+    .shop-cat-box:hover {
+        transform: scale(1.05);
+    }
+</style>

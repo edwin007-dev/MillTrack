@@ -1,0 +1,17 @@
+<div class="row">
+    <div *ngFor="let subcategory of subcategories" class="col-lg-4 col-md-6 mb-4">
+        <div class="card shadow-lg border-light rounded">
+            <a [routerLink]="['/customermaster/custservicesingleview',subcategory.subcat_id]">
+                <img class="card-img-top img-size rounded-top" 
+                     src="http://localhost:3000/images/{{ subcategory.image }}" 
+                     alt="{{ subcategory.subcatname }}" 
+                     style="cursor: pointer;">
+            </a>
+            <div class="card-body text-center">
+                <h5 class="card-title text-primary">{{ subcategory.subcatname }}</h5>
+                <p class="text-muted">Price: ₹{{ subcategory.amount }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

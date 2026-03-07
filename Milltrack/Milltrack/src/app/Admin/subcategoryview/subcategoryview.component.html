@@ -1,0 +1,51 @@
+<div class="card-body px-0 pb-2">
+    <div class="table-responsive p-0" style="margin-top: 90px;">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-xs" [routerLink]="['/adminmaster/subcategoryreg']">Add New</button>
+        </div>
+        <form [formGroup]="subcategoryformgroup" enctype="multipart/form-data"> 
+            <div class="form-group"> 
+                <label for="exampleSelectGender"><strong>CATEGORY</strong></label> 
+                <select class="form-control" formControlName="category_id" (change)="getcategorybyid()"> 
+                    <option value="">---Choose Category---</option>
+                    <option *ngFor="let data of categorydataarray" value="{{data.category_id}}">{{data.categoryname}}</option> 
+                </select> 
+            </div> 
+            <table class="table table-hover" style="width: 100%; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th scope="col">SI NO.</th>
+                        <th scope="col">Subcategory Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of subcategorydataarray, let i = index" class="table-light">
+                        <td>{{i+1}}</td>
+                        <td>{{data.subcatname}}</td>
+                        <td class="text-danger">
+                            <img style="width:70px; height:70px;" src="http://localhost:3000/images/{{data.image}}" alt="{{data.image}}">
+                        </td>
+                        <td>{{data.description}}</td>
+                        <td>
+                            <div class="d-flex justify-content-end pt-3">
+                                <a [routerLink]="['/adminmaster/editsubcategory',data.subcat_id]"><button class="btn btn-primary">Edit</button></a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-end pt-3">
+                                <button class="btn btn-primary" 
+                                (click)="deletesubcategory(data.subcat_id)">
+                                Delete
+                            </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-9">
+
+        <h1 class="text-white mb-4">Subcategory edit</h1>
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body">
+            <form [formGroup]="subcategoryeditformGroup" enctype="multipart/form-data">
+
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+
+                  <h6 class="mb-0">Subcategory Name</h6>
+
+                </div>
+                <div class="col-md-9 pe-5">
+
+                  <input type="text" class="form-control form-control-lg" id="formFileLg"
+                    formControlName="subcatname" />
+                  <!-- <input type="hidden" class="form-control form-control-lg" id="formFileLg"
+                    formControlName="category_id" /> -->
+                </div>
+              </div>
+
+
+              <hr class="mx-n3">
+
+              <div class="row align-items-center py-3">
+                <div class="col-md-3 ps-5">
+
+                  <h6 class="mb-0">Image</h6>
+
+                </div>
+                <div class="col-md-9 pe-5" *ngFor="let data of subcategoryeditdataarray">
+                  <img style="width:70px; height:70px;" src="http://localhost:3000/images/{{data.image}}">
+                  <input type="file" formControlName="image" (change)="selectFile($event)"
+                    class="form-control form-control-lg" placeholder="Upload The Image" />
+                </div>
+              </div>
+
+              <div class="row align-items-center pt-4 pb-3">
+                <div class="col-md-3 ps-5">
+
+                  <h6 class="mb-0">Description</h6>
+
+                </div>
+                <div class="col-md-9 pe-5">
+
+                  <input type="text" class="form-control form-control-lg" id="formFileLg"
+                    formControlName="description" />
+                  <!-- <input type="hidden" class="form-control form-control-lg" id="formFileLg"
+                    formControlName="category_id" /> -->
+                </div>
+              </div>
+
+              <hr class="mx-n3">
+
+              <div class="px-5 py-4">
+                <button type="submit" (click)="Onsubmit()" data-mdb-button-init data-mdb-ripple-init
+                  class="btn btn-primary btn-lg">Register</button>
+                <button class="btn btn-light" type="reset">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

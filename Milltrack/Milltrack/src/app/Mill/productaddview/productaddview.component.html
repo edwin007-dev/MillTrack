@@ -1,0 +1,68 @@
+<div class="card shadow-lg rounded-4 border-0">
+    <div class="card-header bg-primary text-white text-center py-3 rounded-top">
+      <h4 class="mb-0">PRODUCT VIEW</h4>
+    </div>
+    <div class="card-body bg-light p-4">
+      
+      <form [formGroup]="productviewgroup">
+        <!-- Category Dropdown -->
+        <div class="mb-4">
+            <label class="form-label fw-bold text-primary">Category</label>
+            <select class="form-control form-control-lg" formControlName="category_id" (change)="getproductbyid()">
+              <option value="" disabled selected>---Choose subcategory---</option>
+              <option *ngFor="let data of categorydataarray" [value]="data.category_id">
+                {{ data.categoryname }}
+              </option>
+            </select>
+          </div>
+  
+        <!-- Subcategory Dropdown -->
+        <!-- <div class="mb-4">
+          <label class="form-label fw-bold text-primary">Sub Category</label>
+          <select class="form-control form-control-lg" formControlName="subcat_id" (change)="getsubcategorybyid()">
+            <option value="">--- Choose Subcategory ---</option>
+            <option *ngFor="let data of subcategorydataarray" [value]="data.subcat_id">
+              {{ data.subcatname }}
+            </option>
+          </select>
+        </div> -->
+  
+        <!-- Table appears only when both Category & Subcategory are selected -->
+        <div class="table-responsive" *ngIf="productviewgroup.get('category_id')?.value">
+          <table class="table table-hover table-bordered bg-white shadow-sm">
+            <thead class="table-primary text-center">
+              <tr>
+                <th>Si No</th>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Unit</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-middle text-center" *ngFor="let data of productdataarray; let i = index" >
+                <td>{{ i + 1 }}</td>
+                <td>{{ data.productname }}</td>
+                <td>
+                  <img style="width:70px; height:70px; border-radius:5px;" [src]="'http://localhost:3000/images/' + data.image">
+                </td>
+                <td>{{ data.price }}</td>
+                <td>{{ data.stock }}</td>
+                <td>{{ data.unit }}</td>
+                <td>
+                  <button class="btn btn-success btn-sm px-3">✏ Edit</button>
+                </td>
+                <td>
+                  <button class="btn btn-danger btn-sm px-3">🗑 Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+      

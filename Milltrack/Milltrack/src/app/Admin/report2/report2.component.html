@@ -1,0 +1,50 @@
+<form [formGroup]="reportformgroup">
+    <div class="row justify-content-center" style="padding-top: 100px;">
+      <div class="col-md-2">
+        <label>Start Date</label>
+        <input type="date" formControlName="startdate" class="form-control" style="height: 45px;">
+      </div>
+      <div class="col-md-2">
+        <label>End Date</label>
+        <input type="date" formControlName="enddate" class="form-control" style="height: 45px;">
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button (click)="OnSubmit()" class="btn btn-primary w-100" style="height: 45px; border-radius: 25px;">Submit</button>
+      </div>
+    </div>
+  </form>
+  
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow p-4">
+          <h3 class="text-center mb-4" style="font-weight: bold;"> Date Wise Report</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Product Image</th>
+                  <th>Product Name</th>
+                  <th>Product Rate</th>
+                  <th>Total Amount</th>
+                  <th>Booked Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of reportdetails">
+                  <td>
+                    <img src="http://localhost:3000/images/{{data.image}}" alt="Product Image" width="60" height="60" style="object-fit: cover; border-radius: 10px;">
+                  </td>
+                  <td style="vertical-align: middle;">{{data.productname}}</td>
+                  <td style="vertical-align: middle;">₹{{data.totalamount}}</td>
+                  <td style="vertical-align: middle;">₹{{data.price}}</td>
+                  <td style="vertical-align: middle;">{{data.orderdate | date: 'mediumDate'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

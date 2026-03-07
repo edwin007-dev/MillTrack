@@ -1,0 +1,73 @@
+<div class="card-body px-4 pb-4">
+  <div class="container-fluid" style="margin-top: 50px;">
+    <!-- Service Payments -->
+    <div class="card shadow-lg mb-5">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Service Payments</h4>
+      </div>
+      <div class="card-body p-3">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 5%;">SI NO.</th>
+                <th style="width: 25%;">Customer Name</th>
+                <th style="width: 20%;">Payment Date</th>
+                <th style="width: 20%;">Type</th>
+                <th style="width: 20%;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of servicePayments; let i = index" class="table-light">
+                <td>{{ i + 1 }}</td>
+                <td class="text-capitalize">{{ data.name }}</td>
+                <td>{{ data.paymentdate | date:'dd-MM-yyyy' }}</td>
+                <td>
+                  <span class="badge rounded-pill bg-light text-uppercase px-3 py-2 fw-semibold shadow-sm">{{ data.type }}</span>
+                </td>
+                <td class="text-end pe-4">
+                  <strong class="text-primary">₹ {{ data.amount | number:'1.2-2' }}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Payments -->
+    <div class="card shadow-lg">
+      <div class="card-header bg-warning text-dark">
+        <h4 class="mb-0">Order Payments</h4>
+      </div>
+      <div class="card-body p-3">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 5%;">SI NO.</th>
+                <th style="width: 25%;">Customer Name</th>
+                <th style="width: 20%;">Payment Date</th>
+                <th style="width: 20%;">Type</th>
+                <th style="width: 20%;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of orderPayments; let i = index" class="table-light">
+                <td>{{ i + 1 }}</td>
+                <td class="text-capitalize">{{ data.name }}</td>
+                <td>{{ data.paymentdate | date:'dd-MM-yyyy' }}</td>
+                <td>
+                  <span class="badge rounded-pill bg-light text-uppercase px-3 py-2 fw-semibold shadow-sm">{{ data.type }}</span>
+                </td>
+                <td class="text-end pe-4">
+                  <strong class="text-danger">₹ {{ data.amount | number:'1.2-2' }}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header">
+      <div class="card-title">MILL VIEW</div>
+    </div>
+    <div class="card-body">
+  
+      <div class="card-sub">
+        <code class="highlighter-rouge"></code> 
+      </div>
+      
+      <form [formGroup]="millformgroup"> 
+        <div class="table-responsive"> <!-- Removed the inline margin-left style -->
+          <div class="form-group">
+            <label for="exampleSelectGender"><strong>DISTRICT</strong></label>
+            <select class="form-control" formControlName="district_id" (change)="getdistrictbyid()"> 
+              <option value="">---Choose District---</option>
+              <option *ngFor="let data of districtdataarray" value="{{data.district_id}}">{{data.districtname}}</option> 
+            </select> 
+          </div> 
+          
+          <div class="form-group">
+            <label for="exampleSelectGender"><strong>Location</strong></label>
+            <select class="form-control" formControlName="location_id" (change)="viewmillbylid()"> 
+              <option value="">---Choose Location---</option>
+              <option *ngFor="let data of locationdataarray" value="{{data.location_id}}">{{data.locationname}}</option> 
+            </select> 
+          </div> 
+
+          
+          <!-- Table starts here -->
+          <table class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Si No</th>
+                <th scope="col">Mill name</th>
+                <th scope="col">License Number</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Image</th>
+                <th scope="col">Reg Date</th>
+                <th scope="col">Accept</th>
+                <th scope="col">Reject</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of milldataarray, let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.license}}</td>
+                <td>{{data.phone}}</td>
+                <td class="text-danger">
+                  <img style="width:70px; height:70px;" src="http://localhost:3000/images/{{data.image}}">
+              </td>
+                <td>{{data.regdate}}</td>
+                <td>
+                  <div class="d-flex justify-content-start pt-3">
+                    <a><button class="btn btn-primary" (click)="millaccept(data.login_id)">Accept</button></a>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex justify-content-start pt-3">
+                    <a><button class="btn btn-primary" (click)="millreject(data.login_id)">Reject</button></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Center the payment box */
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding-left: 50px; 
+        }
+
+        /* Stylish card design */
+        .card {
+            width: 450px; /* Reduced width */
+            max-width: 100%;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+            margin-left: 30px;
+        }
+
+        /* Smaller image styling */
+        .card-img-top {
+            height: 180px; /* Reduced height */
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Input fields styling */
+        .form-control {
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        /* Pay button styling */
+        .btn-pay {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-pay:hover {
+            background: linear-gradient(135deg, #ff638f, #ff3d7b);
+        }
+
+        /* Label adjustments */
+        .form-label {
+            font-weight: bold;
+            color: #333;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <form [formGroup]="paymentform"></form>
+
+    <section>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-9 col-lg-7 col-xl-5">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/person-paying-with-debit-card-terminal_23-2149224672.jpg" 
+                             class="card-img-top" alt="Customer paying using a debit card"/>
+                        <div class="card-body">
+                            <h5 class="text-center text-primary mb-3">Complete Your Payment For Service Booking</h5>
+                                <!-- Amount Display -->
+            <h5 class="mb-4">Total: ₹<span *ngIf="PaymentArray.length > 0">{{PaymentArray[0].amount}}</span></h5>
+                        </div>
+                        <div class="rounded-bottom">
+                            <div class="card-body">
+                                <p class="mb-3 text-muted">Enter your card details below:</p>
+
+                                <div class="form-outline mb-3">
+                                    <label class="form-label" for="cardNumber">Card Number</label>
+                                    <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 1234 5678"/>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="expiryDate">Expiration Date</label>
+                                            <input type="text" id="expiryDate" class="form-control" placeholder="MM/YYYY"/>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="cvv">CVV</label>
+                                            <input type="password" id="cvv" class="form-control" placeholder="CVV"/>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <button 
+                                type="submit" 
+                                (click)="Onsubmit()" 
+                                class="btn btn-custom" 
+                                style="background: linear-gradient(90deg, #ff7e5f, #feb47b); color: white; border: none; padding: 12px 24px; font-size: 18px; border-radius: 8px;
+                                 box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                                PAY ₹{{ PaymentArray?.[0]?.amount || '...' }}
+                              </button>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

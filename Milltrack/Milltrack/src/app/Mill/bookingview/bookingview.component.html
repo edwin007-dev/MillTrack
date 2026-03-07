@@ -1,0 +1,83 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title fw-bold text-uppercase text-center py-2" 
+    style="font-size: 1.8rem; color: #007bff; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">
+ Service Booking View
+</div>
+
+  </div>
+  <div class="card-body">
+    <div class="card-sub">
+      <code class="highlighter-rouge"></code> 
+    </div>
+
+    <form [formGroup]="bookingformgroup">
+      <!-- Table starts here -->
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Si No</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Service Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Accept</th>
+            <th scope="col">Reject</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of bookingarray; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.subcatname}}</td>
+            <td class="text-danger">
+              <img style="width:70px;height:70px;" src="http://localhost:3000/images/{{data.image}}">
+            </td>
+            <td>{{data.quantity}}</td>
+            <td>{{data.unit}}</td>
+            <td>{{data.amount}}</td>
+            <td>
+              <div class="d-flex justify-content-start pt-3">
+                <button class="btn btn-primary" (click)="openModal(data.booking_id)" type="button">Accept</button>
+              </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-start pt-3">
+                <button class="btn btn-danger" (click)="bookingreject(data.booking_id)" type="button">Reject</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form> 
+  </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="acceptModalLabel">Enter Time</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="acceptForm">
+          <div class="mb-3">
+            <label for="timeInput" class="form-label">Time</label>
+            <input type="text" id="timeInput" class="form-control" formControlName="time">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+
+
+
+        <button type="button" class="btn btn-primary" (click)="submitBooking()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

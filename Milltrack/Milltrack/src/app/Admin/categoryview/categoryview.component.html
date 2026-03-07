@@ -1,0 +1,43 @@
+<div class="card-body px-0 pb-2">
+    <div class="table-responsive p-0" style="margin-left:82px;inline-size: fit-content;margin-top:90px;">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-xs" [routerLink]="['/adminmaster/categoryreg']">Add
+                New</button>
+        </div>
+        
+        <table class="table table-hover" style="width:1100px;">
+            <thead>
+                <tr>
+                    <th scope="col">SI NO.</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                <tr *ngFor="let data of categoryArray,let i=index" class="table-light">
+                  <td>{{i+1}}</td>
+                    <td>{{data.categoryname}}</td>
+                    <td class="text-danger"><img style="width:70px;height:70px;"
+                            src="http://localhost:3000/images/{{data.image}}">
+                    </td>
+                    <td>
+                       
+                            <a  [routerLink]="['/adminmaster/editcategory',data.category_id]"><button class="btn btn-primary">Edit</button></a>
+                        
+            
+                    <td>
+                        <button class="btn btn-primary" 
+                            (click)="Deletecategory(data.category_id)">
+                            Delete
+                        </button>
+    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> 

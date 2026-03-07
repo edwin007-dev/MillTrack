@@ -1,0 +1,31 @@
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Flex container to align the title and button -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">Location Registration</h4>
+                            <button [routerLink]="['/adminmaster/locationview']" class="btn btn-primary">
+                                View
+                            </button>
+                        </div>
+
+                        <!-- Form for location registration -->
+                        <form class="forms-sample" [formGroup]="EditLocationFormGroup">
+                        
+
+                            <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Locationname" formControlName="districtname"readonly>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Location Name</label>
+                                <input type="text" formControlName="locationname" class="form-control" id="exampleInputName1" placeholder="locationname">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2" (click)="onSubmit()">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

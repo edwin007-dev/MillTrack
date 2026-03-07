@@ -1,0 +1,58 @@
+<div class="container">
+
+    
+    <!-- Requested Orders -->
+    <div class="order-card">
+        <div class="card-header bg-warning text-black" (click)="toggleSection('requested')">
+          Requested Bookings ▼
+        </div>
+        <div class="card-body" *ngIf="showRequested">
+          <div class="order-item" *ngFor="let data of requestedOrders">
+            <!-- <img src="{{order.image}}" class="order-img" alt="Order Image"> -->
+            <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
+            <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
+            <p><strong>Requested Date:</strong>&nbsp; {{data.required_date}}</p>
+            <p><strong>Quantity</strong>&nbsp;{{data.quantity}}</p>
+            <p><strong>Amount</strong>&nbsp;{{data.amount}}</p>
+          </div>
+        </div>
+      </div>
+    <!-- Accepted Orders -->
+    <div class="order-card">
+      <div class="card-header bg-primary text-white" (click)="toggleSection('accepted')">
+        Accepted Bookings ▼
+      </div>
+      <div class="card-body" *ngIf="showAccepted">
+        <div class="order-item" *ngFor="let data of acceptedOrders">
+          <!-- <img src="{{order.image}}" class="order-img" alt="Order Image"> -->
+          <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
+          <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
+          <p><strong>Requested Date:</strong>&nbsp; {{data.required_date}}</p>
+          <p><strong>Quantity</strong>&nbsp;{{data.quantity}}</p>
+          <p><strong>Amount</strong>&nbsp;{{data.amount}}</p>
+          <p><strong>Time&nbsp;{{data.time}}</strong></p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Rejected Orders -->
+    <div class="order-card">
+      <div class="card-header bg-danger text-white" (click)="toggleSection('rejected')">
+        Rejected Bookings ▼
+      </div>
+      <div class="card-body" *ngIf="showRejected">
+        <div class="order-item" *ngFor="let order of rejectedOrders">
+          <!-- <img src="{{order.image}}" class="order-img" alt="Order Image"> -->
+          <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
+          <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
+          <p><strong>Requested Date:</strong>&nbsp; {{data.required_date}}</p>
+          <p><strong>Quantity</strong>&nbsp;{{data.quantity}}</p>
+          <p><strong>Amount</strong>&nbsp;{{data.amount}}</p>
+          <p><strong>Time&nbsp;{{data.time}}</strong></p>
+        </div>
+      </div>
+    
+    </div>
+  
+  </div>
+  

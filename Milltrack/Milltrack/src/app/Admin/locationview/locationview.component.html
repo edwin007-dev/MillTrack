@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">LOCATION VIEW</div>
+  </div>
+  <div class="card-body">
+
+    <div class="card-sub">
+      <code class="highlighter-rouge"></code> 
+    </div>
+    
+    <form [formGroup]="locationformgroup"> 
+      <div class="table-responsive"> <!-- Removed the inline margin-left style -->
+        <div class="form-group">
+          <label for="exampleSelectGender"><strong>DISTRICT</strong></label>
+          <select class="form-control" formControlName="district_id" (change)="getdistrictbyid()"> 
+            <option value="">---Choose District---</option>
+            <option *ngFor="let data of districtdataarray" value="{{data.district_id}}">{{data.districtname}}</option> 
+          </select> 
+        </div> 
+        
+        <!-- Table starts here -->
+        <table class="table table-striped mt-3">
+          <thead>
+            <tr>
+              <th scope="col">Si No</th>
+              <th scope="col">Location name</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of locationdataarray, let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{data.locationname}}</td>
+              <td>
+                <div class="d-flex justify-content-start pt-3">
+                  <a [routerLink]="['/adminmaster/editlocation',data.location_id]"><button class="btn btn-primary">Edit</button></a>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-primary" 
+                    (click)="Deletelocation(data.location_id)">
+                    Delete
+                </button>
+</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+</div>
