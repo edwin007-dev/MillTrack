@@ -88,26 +88,36 @@ app.use('/images', (req, res, next) => {
   // Decode URL-encoded characters so spaces/special chars in filenames match files on disk
   const requestedPath = decodeURIComponent(req.path.substring(1)); // Remove leading slash, decode %20 -> space, etc.
   const imagesDir = path.join(__dirname, 'public', 'images');
-  const fullPath = path.join(imagesDir, requestedPath);
+  const millsDir = path.join(imagesDir, 'Mills'); // Also check Mills subdirectory
 
-  // Check if file exists exactly as requested
-  if (fs.existsSync(fullPath)) {
-    return next();
-  }
-
-  // Try to find file with common image extensions
   const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif'];
-  for (let ext of extensions) {
-    if (fs.existsSync(fullPath + ext)) {
-      return res.sendFile(fullPath + ext);
-    }
-  }
 
-  // Try to find file by stripping extension and adding correct one
-  const fileWithoutExt = fullPath.split('.').slice(0, -1).join('.');
-  for (let ext of extensions) {
-    if (fs.existsSync(fileWithoutExt + ext)) {
-      return res.sendFile(fileWithoutExt + ext);
+  // List of directories to search (in order)
+  const searchDirs = [imagesDir, millsDir];
+
+  for (const dir of searchDirs) {
+    const fullPath = path.join(dir, requestedPath);
+
+    // Check if file exists exactly as requested
+    if (fs.existsSync(fullPath)) {
+      return next(); // Let express.static handle it
+    }
+
+    // Try to find file with common image extensions
+    for (let ext of extensions) {
+      if (fs.existsSync(fullPath + ext)) {
+        return res.sendFile(fullPath + ext);
+      }
+    }
+
+    // Try to find file by stripping extension and adding correct one
+    const fileWithoutExt = fullPath.split('.').slice(0, -1).join('.');
+    if (fileWithoutExt !== fullPath) {
+      for (let ext of extensions) {
+        if (fs.existsSync(fileWithoutExt + ext)) {
+          return res.sendFile(fileWithoutExt + ext);
+        }
+      }
     }
   }
 
