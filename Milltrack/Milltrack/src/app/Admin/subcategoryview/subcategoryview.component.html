@@ -27,7 +27,7 @@
                         <td>{{i+1}}</td>
                         <td>{{data.subcatname}}</td>
                         <td class="text-danger">
-                            <img style="width:70px; height:70px;" src="http://localhost:3000/images/{{data.image}}" alt="{{data.image}}">
+                            <img style="width:70px; height:70px;" [src]="imageService.getUrl(data.image)" alt="{{data.image}}">
                         </td>
                         <td>{{data.description}}</td>
                         <td>

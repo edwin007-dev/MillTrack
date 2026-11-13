@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-productsingleview',
@@ -21,15 +22,18 @@ export class ProductsingleviewComponent {
   sold: any;
   customer_id: any;
   login_id: any;
+  public imageService: ImageService;
 
   constructor(
     private dbService: DbserviceService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router:Router
+    private router:Router,
+    public imgService: ImageService
   ) {
     this.product_id = this.route.snapshot.paramMap.get('product_id');
     console.log("subcat:", this.product_id);
+    this.imageService = imgService;
   }
 
   ngOnInit(): void {

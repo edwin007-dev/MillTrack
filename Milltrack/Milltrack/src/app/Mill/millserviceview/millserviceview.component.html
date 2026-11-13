@@ -22,7 +22,7 @@
             
               <td>
                 <img style="width:70px; height:70px; border-radius:5px;"
-                  [src]="'http://localhost:3000/images/' + data.image">
+                  [src]="imageService.getUrl(data.image)">
               </td>
               <td>{{ data.categoryname }}</td>
               

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-custservicesigleview',
@@ -17,12 +18,15 @@ export class CustservicesigleviewComponent implements OnInit {
   price: number = 0; // Default price to prevent NaN
   unit: string = 'kilo'; // Default unit selection
   singleviewgroup!: FormGroup;
+  public imageService: ImageService;
 
   constructor(
-    private dbService: DbserviceService, 
+    private dbService: DbserviceService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public imgService: ImageService
   ) {
+    this.imageService = imgService;
     this.subcat_id = this.route.snapshot.paramMap.get('subcat_id');
     console.log("subcat:",this.subcat_id);
   }
@@ -40,10 +44,10 @@ export class CustservicesigleviewComponent implements OnInit {
 
     const subcat_id = this.subcat_id;
     console.log("Sending subcat_id to API:", subcat_id); // ✅ Debugging log
-    
+
     this.dbService.subcatsingleview({ subcat_id }).then((data: any) => {
       console.log("Data received:", data); // ✅ Debugging log
-    
+
       if (data.length === 0) {
         console.error("No data found for subcat_id:", subcat_id);
       } else {

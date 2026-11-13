@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-productaddview',
@@ -11,11 +12,14 @@ import { DbserviceService } from 'src/app/dbservice.service';
 
   export class ProductaddviewComponent {
     public categorydataarray:any[]=[];
-    
+
       productviewgroup: any;
       productdataarray: any;
-    
-      constructor(private fb: FormBuilder, private router:Router,private dbservice: DbserviceService){}
+      public imageService: ImageService;
+
+      constructor(private fb: FormBuilder, private router:Router,private dbservice: DbserviceService, public imgService: ImageService){
+        this.imageService = imgService;
+      }
     
       ngOnInit():void{
         this.productviewgroup=this.fb.group({

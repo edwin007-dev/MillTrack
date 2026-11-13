@@ -21,7 +21,7 @@
                   <td>{{i+1}}</td>
                     <td>{{data.categoryname}}</td>
                     <td class="text-danger"><img style="width:70px;height:70px;"
-                            src="http://localhost:3000/images/{{data.image}}">
+                            [src]="imageService.getUrl(data.image)">
                     </td>
                     <td>
                        

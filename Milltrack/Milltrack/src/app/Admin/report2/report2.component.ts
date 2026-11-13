@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-report2',
@@ -11,7 +12,10 @@ import { DbserviceService } from 'src/app/dbservice.service';
 export class Report2Component implements OnInit {
   reportdetails: any;
   reportformgroup!: FormGroup;  // Define the form group properly
-  constructor(private fb: FormBuilder, private router: Router, private db: DbserviceService) {}
+  public imageService: ImageService;
+  constructor(private fb: FormBuilder, private router: Router, private db: DbserviceService, public imgService: ImageService) {
+    this.imageService = imgService;
+  }
 
   ngOnInit(): void {
     // Initialize form inside ngOnInit

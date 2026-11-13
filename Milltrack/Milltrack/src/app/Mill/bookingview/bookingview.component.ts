@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 declare var bootstrap: any; // Required to use Bootstrap Modal JS
 
@@ -18,8 +19,10 @@ export class BookingviewComponent {
   acceptForm: FormGroup;
   selectedBookingId: string = '';
   modalInstance: any;
+  public imageService: ImageService;
 
-  constructor(private fb: FormBuilder, private router: Router, private dbservice: DbserviceService) {
+  constructor(private fb: FormBuilder, private router: Router, private dbservice: DbserviceService, public imgService: ImageService) {
+    this.imageService = imgService;
     this.acceptForm = this.fb.group({
       time: ['', Validators.required]
     });
@@ -79,5 +82,5 @@ export class BookingviewComponent {
       }
     });
   }
-  
+
 }

@@ -5,9 +5,9 @@
     <div class="row justify-content-center" *ngIf="ProductArray.length > 0; else emptyCart">
         <div class="col-md-4 col-sm-6 mb-4" *ngFor="let product of ProductArray">
             <div class="card shadow-lg border-0 rounded-4 h-100">
-                <img src="http://localhost:3000/images/{{ product.image }}" 
-                     class="card-img-top product-image rounded-top-4" 
-                     alt="{{ product.productname }}" 
+                <img [src]="imageService.getUrl(product.image)"
+                     class="card-img-top product-image rounded-top-4"
+                     alt="{{ product.productname }}"
                      style="height: 250px; object-fit: cover;">
                 
                 <div class="card-body d-flex flex-column justify-content-between text-center p-4">

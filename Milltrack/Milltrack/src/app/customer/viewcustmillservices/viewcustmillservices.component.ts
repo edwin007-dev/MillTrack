@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-viewcustmillservices',
@@ -13,8 +14,11 @@ export class ViewcustmillservicesComponent
   millid: string | null = null;
   categoryid: string | null = null;
   subcategories: any[] = [];
+  public imageService: ImageService;
 
-  constructor(private route: ActivatedRoute, private dbService: DbserviceService) {}
+  constructor(private route: ActivatedRoute, private dbService: DbserviceService, public imgService: ImageService) {
+    this.imageService = imgService;
+  }
 
   ngOnInit() 
   {

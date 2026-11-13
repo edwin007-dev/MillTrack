@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-editsubcategory',
@@ -16,19 +17,21 @@ export class EditsubcategoryComponent {
     selectedFiles?: FileList;
     currentFile?: any;
     message = '';
-  
-  
+    public imageService: ImageService;
+
     constructor(
       private fb: FormBuilder,
       private dbservice: DbserviceService,
       private router: Router,
-      private route: ActivatedRoute
+      private route: ActivatedRoute,
+      public imgService: ImageService
     ) {
+      this.imageService = imgService;
       route.paramMap.subscribe((Params: ParamMap) => {
         this.subcat_id = Params.get('subcat_id');
       });
     }
-  
+
     ngOnInit(): void {
       console.log(this.subcat_id);
       this.subcategoryeditformGroup = this.fb.group({
@@ -37,7 +40,7 @@ export class EditsubcategoryComponent {
         image: [''],
         description: [''],
       });
-  
+
       const id = this.subcat_id;
       console.log(id)
       this.dbservice.getsubcategorydetails({ id }).then((data: any) => {
@@ -52,12 +55,12 @@ export class EditsubcategoryComponent {
         console.log(this.subcategoryeditformGroup.value);
       });
     }
-  
+
     selectFile(event: any): void {
       this.selectedFiles = event.target.files;
       console.log(event.target.files);
     }
-  
+
     Onsubmit() {
       if (this.selectedFiles) {
         //console.log(this.selectedFiles);
@@ -73,14 +76,14 @@ export class EditsubcategoryComponent {
         }
         this.subcategoryeditformGroup.value.image = this.currentFile.name;
         console.log(this.currentFile.name)
-  
+
         this.dbservice.updatesubcategory(this.subcategoryeditformGroup.value).then((confirmation: any) => {
           alert('SubCategory Details Updated Successfully');
           this.router.navigate(['/adminmaster/subcategoryview'])
         });
-      } 
+      }
       else {
-  
+
         this.dbservice.updatesubcategory(this.subcategoryeditformGroup.value).then((confirmation: any) => {
             alert('SubCategory Details Updated Successfully');
             this.router.navigate(['/adminmaster/subcategoryview']);

@@ -33,7 +33,7 @@
               <tbody>
                 <tr *ngFor="let data of reportdetails">
                   <td>
-                    <img src="http://localhost:3000/images/{{data.image}}" alt="Product Image" width="60" height="60" style="object-fit: cover; border-radius: 10px;">
+                    <img [src]="imageService.getUrl(data.image)" alt="Product Image" width="60" height="60" style="object-fit: cover; border-radius: 10px;">
                   </td>
                   <td style="vertical-align: middle;">{{data.productname}}</td>
                   <td style="vertical-align: middle;">₹{{data.totalamount}}</td>

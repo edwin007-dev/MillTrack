@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-millview',
@@ -14,7 +15,10 @@ export class MillviewComponent implements OnInit {
   public locationdataarray: any[] = [];
   public milldataarray: any[] = [];
   millformgroup!: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private dbservice: DbserviceService) { }
+  public imageService: ImageService;
+  constructor(private fb: FormBuilder, private router: Router, private dbservice: DbserviceService, public imgService: ImageService) {
+    this.imageService = imgService;
+  }
 
   ngOnInit(): void {
     this.millformgroup = this.fb.group({

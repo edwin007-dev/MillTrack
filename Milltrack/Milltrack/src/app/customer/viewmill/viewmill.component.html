@@ -64,8 +64,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let data of milldataarray">
                 <div class="card">
                     <a [routerLink]="['/customermaster/viewcustmillcategory', data.login_id]">
-                        <img class="card-img-top mill-image" 
-                             src="http://localhost:3000/images/{{ data.image }}"  
+                        <img class="card-img-top mill-image"
+                             [src]="imageService.getUrl(data.image)"
                              alt="Mill Image" />
                     </a>
                     <div class="card-body text-center">

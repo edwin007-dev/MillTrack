@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-millserviceview',
@@ -16,7 +17,10 @@ export class MillserviceviewComponent {
   millid: any
   categorydataarray: any;
   login_id=localStorage.getItem('login_id')
-  constructor(private fb: FormBuilder, private dbService: DbserviceService) { }
+  public imageService: ImageService;
+  constructor(private fb: FormBuilder, private dbService: DbserviceService, public imgService: ImageService) {
+    this.imageService = imgService;
+  }
 
   ngOnInit(): void {
     // Initialize the form

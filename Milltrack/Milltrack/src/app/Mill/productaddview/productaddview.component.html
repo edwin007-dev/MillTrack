@@ -47,7 +47,7 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ data.productname }}</td>
                 <td>
-                  <img style="width:70px; height:70px; border-radius:5px;" [src]="'http://localhost:3000/images/' + data.image">
+                  <img style="width:70px; height:70px; border-radius:5px;" [src]="imageService.getUrl(data.image)">
                 </td>
                 <td>{{ data.price }}</td>
                 <td>{{ data.stock }}</td>

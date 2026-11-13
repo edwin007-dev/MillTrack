@@ -85,7 +85,8 @@ app.use(cookieParser());
 // Image fuzzy matching middleware - handles files with or without extensions
 app.use('/images', (req, res, next) => {
   const fs = require('fs');
-  const requestedPath = req.path.substring(1); // Remove leading slash
+  // Decode URL-encoded characters so spaces/special chars in filenames match files on disk
+  const requestedPath = decodeURIComponent(req.path.substring(1)); // Remove leading slash, decode %20 -> space, etc.
   const imagesDir = path.join(__dirname, 'public', 'images');
   const fullPath = path.join(imagesDir, requestedPath);
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-editcategory',
@@ -18,13 +19,16 @@ export class EditcategoryComponent {
   message = '';
   CategoryeditformGroup: any;
   category_id: any;
+  public imageService: ImageService;
 
   constructor(
     private fb: FormBuilder,
     private dbservice: DbserviceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public imgService: ImageService
   ) {
+    this.imageService = imgService;
     route.paramMap.subscribe((Params: ParamMap) => {
       this.category_id = Params.get('category_id');
     });
@@ -77,7 +81,7 @@ export class EditcategoryComponent {
         alert('Category Details Updated Successfully');
         this.router.navigate(['/adminmaster/categoryview'])
       });
-    } 
+    }
     else {
 
       this.dbservice.updatecategory(this.CategoryeditformGroup.value).then((confirmation: any) => {

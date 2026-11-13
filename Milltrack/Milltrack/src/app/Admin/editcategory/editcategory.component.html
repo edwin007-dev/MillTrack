@@ -35,7 +35,7 @@
 
                 </div>
                 <div class="col-md-9 pe-5" *ngFor="let data of categoryeditdataarray">
-                  <img style="width:70px; height:70px;" src="http://localhost:3000/images/{{data.image}}">
+                  <img style="width:70px; height:70px;" [src]="imageService.getUrl(data.image)">
                   <input type="file" formControlName="image" (change)="selectFile($event)"
                     class="form-control form-control-lg" placeholder="Upload The Image" />
                 </div>

@@ -1,6 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,8 +15,11 @@ export class CartComponent {
     carttotal: any[] = [];
     totalamount: number = 0;
     showPaymentButton: boolean = false; // Initially hidden
-  
-    constructor(private router: Router, private dbservice: DbserviceService, private ngZone: NgZone) {}
+    public imageService: ImageService;
+
+    constructor(private router: Router, private dbservice: DbserviceService, private ngZone: NgZone, public imgService: ImageService) {
+      this.imageService = imgService;
+    }
   
     ngOnInit(): void {
       this.dbservice.cart({ login_id: this.login_id }).then((data: any) => {

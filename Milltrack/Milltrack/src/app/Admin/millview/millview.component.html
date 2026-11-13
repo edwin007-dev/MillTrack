@@ -48,7 +48,7 @@
                 <td>{{data.license}}</td>
                 <td>{{data.phone}}</td>
                 <td class="text-danger">
-                  <img style="width:70px; height:70px;" src="http://localhost:3000/images/{{data.image}}">
+                  <img style="width:70px; height:70px;" [src]="imageService.getUrl(data.image)">
               </td>
                 <td>{{data.regdate}}</td>
                 <td>
