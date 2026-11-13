@@ -81,6 +81,39 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Image fuzzy matching middleware - handles files with or without extensions
+app.use('/images', (req, res, next) => {
+  const fs = require('fs');
+  const requestedPath = req.path.substring(1); // Remove leading slash
+  const imagesDir = path.join(__dirname, 'public', 'images');
+  const fullPath = path.join(imagesDir, requestedPath);
+
+  // Check if file exists exactly as requested
+  if (fs.existsSync(fullPath)) {
+    return next();
+  }
+
+  // Try to find file with common image extensions
+  const extensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif'];
+  for (let ext of extensions) {
+    if (fs.existsSync(fullPath + ext)) {
+      return res.sendFile(fullPath + ext);
+    }
+  }
+
+  // Try to find file by stripping extension and adding correct one
+  const fileWithoutExt = fullPath.split('.').slice(0, -1).join('.');
+  for (let ext of extensions) {
+    if (fs.existsSync(fileWithoutExt + ext)) {
+      return res.sendFile(fileWithoutExt + ext);
+    }
+  }
+
+  // If still not found, continue to static middleware
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
