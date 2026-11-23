@@ -3,7 +3,8 @@
         <div class="card shadow-lg border-light rounded">
             <a [routerLink]="['/customermaster/custservicesingleview',subcategory.subcat_id]">
                 <img class="card-img-top img-size rounded-top"
-                     [src]="imageService.getUrl(subcategory.image)"
+                     [src]="imageService.getServiceImageUrl(subcategory.subcatname, subcategory.image)"
+                     (error)="imageService.handleImageError($event, subcategory.image)"
                      alt="{{ subcategory.subcatname }}"
                      style="cursor: pointer;">
             </a>
