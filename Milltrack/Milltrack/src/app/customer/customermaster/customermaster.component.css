@@ -1,0 +1,25 @@
+.main-header,
+.main-header nav.navbar,
+.main-header nav.navbar.bg-light,
+.main-header nav.navbar.bootsnav,
+.main-header .navbar-default {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #eaecef !important;
+}
+
+.brand-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #111;
+}
+
+nav.navbar.bootsnav ul.nav > li > a {
+    color: #222 !important;
+    font-weight: 700;
+}
+
+nav.navbar.bootsnav ul.nav > li.active > a,
+nav.navbar.bootsnav ul.nav > li > a:hover {
+    color: #b0b435 !important;
+}

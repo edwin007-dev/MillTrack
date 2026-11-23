@@ -24,7 +24,7 @@
         <div class="row">
             <div *ngFor="let category of categories" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box text-center">
-                    <img class="category-image" [src]="imageService.getServiceImageUrl(category.categoryname, category.image)" (error)="imageService.handleImageError($event, category.image)" alt="{{ category.categoryname }}" />
+                    <img class="category-image" [src]="imageService.getUrl(category.image)" (error)="imageService.handleImageError($event, category.image)" alt="{{ category.categoryname }}" />
                     <a class="btn hvr-hover" [routerLink]="['/customermaster/viewcustmillservices', login_id, category.category_id]">
                         {{ category.categoryname }}
                     </a>
@@ -43,7 +43,7 @@
         <div class="row">
             <div *ngFor="let product of products" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box text-center">
-                    <img class="category-image" [src]="imageService.getServiceImageUrl(product.productname, product.image)" (error)="imageService.handleImageError($event, product.image)" alt="{{ product.productname }}" />
+                    <img class="category-image" [src]="imageService.getUrl(product.image)" (error)="imageService.handleImageError($event, product.image, product.productname)" alt="{{ product.productname }}" />
                     <a class="btn hvr-hover" [routerLink]="['/customermaster/productsingleview', product.product_id]">
                         {{ product.productname }}
                     </a>

@@ -1,3 +1,18 @@
+.page-title {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #222;
+}
+
+.header-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
 .table th, .table td {
     vertical-align: middle !important;
     font-size: 15px;

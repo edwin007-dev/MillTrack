@@ -103,9 +103,9 @@
     <!-- End Main Top -->
 
     <!-- Start Main Top -->
-    <header class="main-header">
+    <header class="main-header" style="background-color: #f8f9fa !important;">
         <!-- Start Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <nav class="navbar navbar-expand-lg navbar-light navbar-default bootsnav" style="background-color: #f8f9fa !important; border-bottom: 1px solid #eaecef;">
             <div class="container">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header d-flex align-items-center">
@@ -120,20 +120,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a [routerLink]="['/customermaster/customerhome']">Home</a></li>
-                        <li class="nav-item"><a [routerLink]="['/customermaster/viewmill']">View Mill</a></li>
-                        <li class="nav-item"><a [routerLink]="['/customermaster/myservice-booking']">My Services</a></li>
-                        <li class="nav-item"><a [routerLink]="['/customermaster/viewbooking']">Booking View</a></li>
-                        <li class="nav-item"><a [routerLink]="['/customermaster/paymentview']">Payment View</a></li>
-                        <!-- <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown arrow" data-toggle="dropdown">Additional Pages</a>
-                            <ul class="dropdown-menu">
-                               
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li> -->
+                        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/customermaster/customerhome']">Home</a></li>
+                        <li class="nav-item" routerLinkActive="active"><a [routerLink]="['/customermaster/viewmill']">View Mill</a></li>
+                        <li class="nav-item" routerLinkActive="active"><a [routerLink]="['/customermaster/myservice-booking']">My Services</a></li>
+                        <li class="nav-item" routerLinkActive="active"><a [routerLink]="['/customermaster/viewbooking']">Booking View</a></li>
+                        <li class="nav-item" routerLinkActive="active"><a [routerLink]="['/customermaster/paymentview']">Payment View</a></li>
                     </ul>
     
                     <!-- Move Logout Button to Extreme Right -->

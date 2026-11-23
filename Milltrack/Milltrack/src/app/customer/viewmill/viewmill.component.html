@@ -66,7 +66,8 @@
                     <a [routerLink]="['/customermaster/viewcustmillcategory', data.login_id]">
                         <img class="card-img-top mill-image"
                              [src]="imageService.getUrl(data.image)"
-                             alt="Mill Image" />
+                             (error)="imageService.handleImageError($event, data.image, data.name)"
+                             alt="{{ data.name }}" />
                     </a>
                     <div class="card-body text-center">
                         <h5 class="card-title"><strong>{{ data.name }}</strong></h5>

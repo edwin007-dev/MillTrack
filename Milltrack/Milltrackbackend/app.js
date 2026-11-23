@@ -86,7 +86,7 @@ app.use(cookieParser());
 app.use('/images', (req, res, next) => {
   const fs = require('fs');
   // Decode URL-encoded characters so spaces/special chars in filenames match files on disk
-  const requestedPath = decodeURIComponent(req.path.substring(1)); // Remove leading slash, decode %20 -> space, etc.
+  const requestedPath = decodeURIComponent(req.path.substring(1)).trim(); // Remove leading slash, decode, trim
   const imagesDir = path.join(__dirname, 'public', 'images');
   const millsDir = path.join(imagesDir, 'Mills'); // Also check Mills subdirectory
 
@@ -99,13 +99,13 @@ app.use('/images', (req, res, next) => {
     const fullPath = path.join(dir, requestedPath);
 
     // Check if file exists exactly as requested
-    if (fs.existsSync(fullPath)) {
-      return next(); // Let express.static handle it
+    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
+      return res.sendFile(fullPath);
     }
 
     // Try to find file with common image extensions
     for (let ext of extensions) {
-      if (fs.existsSync(fullPath + ext)) {
+      if (fs.existsSync(fullPath + ext) && fs.statSync(fullPath + ext).isFile()) {
         return res.sendFile(fullPath + ext);
       }
     }
@@ -114,7 +114,7 @@ app.use('/images', (req, res, next) => {
     const fileWithoutExt = fullPath.split('.').slice(0, -1).join('.');
     if (fileWithoutExt !== fullPath) {
       for (let ext of extensions) {
-        if (fs.existsSync(fileWithoutExt + ext)) {
+        if (fs.existsSync(fileWithoutExt + ext) && fs.statSync(fileWithoutExt + ext).isFile()) {
           return res.sendFile(fileWithoutExt + ext);
         }
       }

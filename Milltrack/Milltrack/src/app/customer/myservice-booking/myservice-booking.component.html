@@ -1,58 +1,69 @@
-<div class="container">
-
-    
-    <!-- Requested Orders -->
-    <div class="order-card">
-        <div class="card-header bg-warning text-black" (click)="toggleSection('requested')">
-          Requested Bookings ▼
-        </div>
-        <div class="card-body" *ngIf="showRequested">
-          <div class="order-item" *ngFor="let data of requestedOrders">
-            <!-- <img src="{{order.image}}" class="order-img" alt="Order Image"> -->
-            <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
-            <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
-            <p><strong>Requested Date:</strong>&nbsp; {{data.required_date}}</p>
-            <p><strong>Quantity</strong>&nbsp;{{data.quantity}}</p>
-            <p><strong>Amount</strong>&nbsp;{{data.amount}}</p>
-          </div>
-        </div>
-      </div>
-    <!-- Accepted Orders -->
-    <div class="order-card">
-      <div class="card-header bg-primary text-white" (click)="toggleSection('accepted')">
-        Accepted Bookings ▼
-      </div>
-      <div class="card-body" *ngIf="showAccepted">
-        <div class="order-item" *ngFor="let data of acceptedOrders">
-          <!-- <img src="{{order.image}}" class="order-img" alt="Order Image"> -->
-          <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
-          <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
-          <p><strong>Requested Date:</strong>&nbsp; {{data.required_date}}</p>
-          <p><strong>Quantity</strong>&nbsp;{{data.quantity}}</p>
-          <p><strong>Amount</strong>&nbsp;{{data.amount}}</p>
-          <p><strong>Time&nbsp;{{data.time}}</strong></p>
-        </div>
-      </div>
+<div class="container" style="margin-top: 40px; margin-bottom: 60px;">
+  <!-- Page Header -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-8 text-center">
+      <h2 class="page-title text-uppercase fw-bold mb-2">My Service Bookings</h2>
+      <p class="text-muted mb-0">Track and manage your requested, accepted, and rejected service bookings</p>
+      <div class="header-divider mx-auto mt-2"></div>
     </div>
-  
-    <!-- Rejected Orders -->
-    <div class="order-card">
-      <div class="card-header bg-danger text-white" (click)="toggleSection('rejected')">
-        Rejected Bookings ▼
-      </div>
-      <div class="card-body" *ngIf="showRejected">
-        <div class="order-item" *ngFor="let order of rejectedOrders">
-          <!-- <img src="{{order.image}}" class="order-img" alt="Order Image"> -->
-          <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
-          <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
-          <p><strong>Requested Date:</strong>&nbsp; {{data.required_date}}</p>
-          <p><strong>Quantity</strong>&nbsp;{{data.quantity}}</p>
-          <p><strong>Amount</strong>&nbsp;{{data.amount}}</p>
-          <p><strong>Time&nbsp;{{data.time}}</strong></p>
-        </div>
-      </div>
-    
-    </div>
-  
   </div>
-  
+
+  <!-- Requested Bookings -->
+  <div class="order-card">
+    <div class="card-header bg-warning text-black" (click)="toggleSection('requested')">
+      Requested Bookings ▼
+    </div>
+    <div class="card-body" *ngIf="showRequested">
+      <div *ngIf="!requestedOrders || requestedOrders.length === 0" class="text-center text-muted py-3">
+        No requested bookings.
+      </div>
+      <div class="order-item" *ngFor="let data of requestedOrders">
+        <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
+        <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
+        <p><strong>Requested Date:</strong>&nbsp; {{data.required_date | date:'dd-MM-yyyy'}}</p>
+        <p><strong>Quantity:</strong>&nbsp;{{data.quantity}} {{data.unit}}</p>
+        <p><strong>Amount:</strong>&nbsp;₹{{data.amount}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accepted Bookings -->
+  <div class="order-card">
+    <div class="card-header bg-primary text-white" (click)="toggleSection('accepted')">
+      Accepted Bookings ▼
+    </div>
+    <div class="card-body" *ngIf="showAccepted">
+      <div *ngIf="!acceptedOrders || acceptedOrders.length === 0" class="text-center text-muted py-3">
+        No accepted bookings.
+      </div>
+      <div class="order-item" *ngFor="let data of acceptedOrders">
+        <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
+        <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
+        <p><strong>Requested Date:</strong>&nbsp; {{data.required_date | date:'dd-MM-yyyy'}}</p>
+        <p><strong>Quantity:</strong>&nbsp;{{data.quantity}} {{data.unit}}</p>
+        <p><strong>Amount:</strong>&nbsp;₹{{data.amount}}</p>
+        <p><strong>Time:</strong>&nbsp;{{data.time}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rejected Bookings -->
+  <div class="order-card">
+    <div class="card-header bg-danger text-white" (click)="toggleSection('rejected')">
+      Rejected Bookings ▼
+    </div>
+    <div class="card-body" *ngIf="showRejected">
+      <div *ngIf="!rejectedOrders || rejectedOrders.length === 0" class="text-center text-muted py-3">
+        No rejected bookings.
+      </div>
+      <div class="order-item" *ngFor="let data of rejectedOrders">
+        <p><strong>Mill:</strong> &nbsp;{{data.name}}<br>{{data.locationname}}<br>{{data.districtname}}</p>
+        <p><strong>Service:</strong> &nbsp;{{data.subcatname}}</p>
+        <p><strong>Requested Date:</strong>&nbsp; {{data.required_date | date:'dd-MM-yyyy'}}</p>
+        <p><strong>Quantity:</strong>&nbsp;{{data.quantity}} {{data.unit}}</p>
+        <p><strong>Amount:</strong>&nbsp;₹{{data.amount}}</p>
+        <p><strong>Time:</strong>&nbsp;{{data.time}}</p>
+      </div>
+    </div>
+  </div>
+</div>

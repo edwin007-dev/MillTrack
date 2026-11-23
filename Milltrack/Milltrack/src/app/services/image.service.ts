@@ -21,7 +21,7 @@ export class ImageService {
    * @returns Complete URL for the image
    */
   buildImageUrl(filename: string | null | undefined, serviceOrProductName?: string | null | undefined): string {
-    if (serviceOrProductName) {
+    if (serviceOrProductName && !filename) {
       const cleanName = serviceOrProductName.trim();
       return `${this.SERVICE_PRODUCTS_PATH}/${encodeURIComponent(cleanName)}.jpg`;
     }
@@ -37,8 +37,8 @@ export class ImageService {
       return cleanFilename;
     }
 
-    // Try local Service or Products folder
-    return `${this.SERVICE_PRODUCTS_PATH}/${encodeURIComponent(cleanFilename)}`;
+    // Default to backend images
+    return `${this.BACKEND_URL}${this.IMAGE_BASE_PATH}/${encodeURIComponent(cleanFilename)}`;
   }
 
   /**
@@ -59,8 +59,8 @@ export class ImageService {
    * Helper method for use in Angular templates.
    */
   getUrl(filename: string | null | undefined, serviceOrProductName?: string | null | undefined): string {
-    if (serviceOrProductName) {
-      return this.getServiceImageUrl(serviceOrProductName, filename);
+    if (serviceOrProductName && !filename) {
+      return this.getServiceImageUrl(serviceOrProductName);
     }
 
     if (!filename) {
@@ -72,31 +72,43 @@ export class ImageService {
       return cleanFilename;
     }
 
-    // Return the local asset path for service/product images
-    return `${this.SERVICE_PRODUCTS_PATH}/${encodeURIComponent(cleanFilename)}`;
+    // Return the backend URL for standard database images
+    return `${this.BACKEND_URL}${this.IMAGE_BASE_PATH}/${encodeURIComponent(cleanFilename)}`;
   }
 
   /**
    * Graceful fallback when an image fails to load.
-   * Tries the backend URL first, then falls back to a default banner.
+   * Tries alternative paths (backend <-> local assets), then falls back to a default banner.
    */
-  handleImageError(event: Event, fallbackFilename?: string | null): void {
+  handleImageError(event: Event, fallbackFilename?: string | null, serviceOrProductName?: string | null): void {
     const target = event.target as HTMLImageElement;
     if (!target) return;
+
+    if (target.src.includes('about-image.jpg')) {
+      return; // prevent infinite error loops
+    }
 
     const attempts = parseInt(target.dataset['loadAttempts'] || '0', 10);
     if (attempts === 0) {
       target.dataset['loadAttempts'] = '1';
-      if (fallbackFilename) {
-        const clean = fallbackFilename.trim();
-        target.src = `${this.BACKEND_URL}${this.IMAGE_BASE_PATH}/${encodeURIComponent(clean)}`;
-        return;
+      // If failed from local assets, try backend
+      if (target.src.includes('/assets/customer/images/Service%20or%20Products') || target.src.includes('/assets/customer/images/Service or Products')) {
+        const fileToTry = fallbackFilename || (serviceOrProductName ? `${serviceOrProductName.trim()}.jpg` : '');
+        if (fileToTry) {
+          target.src = `${this.BACKEND_URL}${this.IMAGE_BASE_PATH}/${encodeURIComponent(fileToTry.trim())}`;
+          return;
+        }
+      } else {
+        // If failed from backend, try local assets
+        const nameToTry = serviceOrProductName || (fallbackFilename ? fallbackFilename.trim().replace(/\.[^/.]+$/, '') : '');
+        if (nameToTry) {
+          target.src = `${this.SERVICE_PRODUCTS_PATH}/${encodeURIComponent(nameToTry.trim())}.jpg`;
+          return;
+        }
       }
     }
-    if (attempts <= 1) {
-      target.dataset['loadAttempts'] = '2';
-      target.src = '/assets/customer/images/about-image.jpg';
-    }
+    // Final fallback: fallback banner/placeholder
+    target.src = '/assets/customer/images/about-image.jpg';
   }
 
   /**
