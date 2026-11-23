@@ -28,7 +28,7 @@ this.LoginArray=data;
 if(data=="")
     {
 alert ('invalid username and password')
-this.router.navigate(['/Guestmaster/login'])
+this.router.navigate(['/guestmaster/login'])
 return
 }
 else {
@@ -39,7 +39,7 @@ localStorage.setItem("login_id",this.LoginArray[0].login_id);
 localStorage.setItem("username",this.LoginArray[0].username)
 var status = this.LoginArray[0].status;
 // console.log(status)
-if(role == "admin")
+if(role && role.toLowerCase() == "admin")
 {
 this.router.navigate(['/adminmaster/adminhome'])
 }

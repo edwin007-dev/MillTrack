@@ -49,5 +49,7 @@ export class AdminhomeComponent {
     }); 
   } 
 
-  
+  printPage(): void {
+    window.print();
+  }
 }

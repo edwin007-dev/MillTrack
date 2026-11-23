@@ -41,7 +41,7 @@ console.log(data);
     this.dbservice.locationreg(this. locationformgroup.value).then((confirmation: any) => {
     if (confirmation.message == "Success") {
     alert('Registered Successfully')
-    this.router.navigate(['adminmaster/categoryview'])
+    this.router.navigate(['/adminmaster/locationview'])
     }
     else {
     alert('Data do not insert,please check')

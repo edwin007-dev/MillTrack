@@ -5,10 +5,6 @@
       <div>
         <h3 class="fw-bold mb-3">Welcome, Admin</h3>
       </div>
-      <div class="ms-md-auto py-2 py-md-0">
-        <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-        <a href="#" class="btn btn-primary btn-round">Add Customer</a>
-      </div>
     </div>
 
     <div class="row">
@@ -96,13 +92,13 @@
             <div class="card-head-row">
               <div class="card-title">User Statistics</div>
               <div class="card-tools">
-                <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
+                <a [routerLink]="['/adminmaster/excelreport']" class="btn btn-label-success btn-round btn-sm me-2">
                   <span class="btn-label">
                     <i class="fa fa-pencil"></i>
                   </span>
                   Export
                 </a>
-                <a href="#" class="btn btn-label-info btn-round btn-sm">
+                <a href="javascript:void(0)" (click)="printPage()" class="btn btn-label-info btn-round btn-sm">
                   <span class="btn-label">
                     <i class="fa fa-print"></i>
                   </span>
