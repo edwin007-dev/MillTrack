@@ -44,3 +44,35 @@
   opacity: 0.85;
   transform: scale(1.02);
 }
+
+/* Sidebar Dropdown & Collapse */
+.sidebar .nav > .nav-item a {
+  cursor: pointer !important;
+  user-select: none;
+}
+
+.sidebar .nav > .nav-item a[aria-expanded="true"] .caret {
+  transform: rotate(-180deg) !important;
+}
+
+.sidebar .nav > .nav-item a .caret {
+  transition: transform 0.3s ease-in-out !important;
+}
+
+.sidebar .nav > .nav-item .collapse:not(.show) {
+  display: none !important;
+}
+
+.sidebar .nav > .nav-item .collapse.show {
+  display: block !important;
+}
+
+.sidebar .nav > .nav-item.submenu > a i,
+.sidebar .nav > .nav-item a[aria-expanded="true"] i {
+  color: #6861ce !important;
+}
+
+.sidebar .nav > .nav-item.submenu > a p,
+.sidebar .nav > .nav-item a[aria-expanded="true"] p {
+  color: #ffffff !important;
+}

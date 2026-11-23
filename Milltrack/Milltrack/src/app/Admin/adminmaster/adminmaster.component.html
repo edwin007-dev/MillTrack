@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="/assets/Admin/css/demo.css" />
   </head>
   <body>
-    <div class="wrapper">
+    <div class="wrapper" [class.sidebar_minimize]="isSidebarMinimized" [class.nav_open]="isMobileNavOpen">
       <!-- Sidebar -->
       <div class="sidebar" data-background-color="dark">
         <div class="sidebar-logo">
@@ -56,14 +56,14 @@
               />
             </a>
             <div class="nav-toggle">
-              <button class="btn btn-toggle toggle-sidebar">
+              <button class="btn btn-toggle toggle-sidebar" (click)="toggleSidebar()">
                 <i class="gg-menu-right"></i>
               </button>
-              <button class="btn btn-toggle sidenav-toggler">
+              <button class="btn btn-toggle sidenav-toggler" (click)="toggleMobileNav()">
                 <i class="gg-menu-left"></i>
               </button>
             </div>
-            <button class="topbar-toggler more">
+            <button class="topbar-toggler more" (click)="toggleMobileNav()">
               <i class="gg-more-vertical-alt"></i>
             </button>
           </div>
@@ -78,13 +78,18 @@
                 </span>
                 <h4 class="text-section">Components</h4>
               </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="javascript:void(0)" data-bs-target="#base" aria-expanded="false" aria-controls="base">
+              <li class="nav-item" [class.submenu]="isRegistrationsOpen">
+                <a 
+                  href="javascript:void(0)" 
+                  (click)="toggleMenu('registrations'); $event.preventDefault()" 
+                  [attr.aria-expanded]="isRegistrationsOpen"
+                  [class.collapsed]="!isRegistrationsOpen"
+                >
                   <i class="fas fa-layer-group"></i>
                   <p>Registrations</p>
                   <span class="caret"></span>
                 </a>
-                <div class="collapse" id="base">
+                <div class="collapse" [class.show]="isRegistrationsOpen" id="base">
                   <ul class="nav nav-collapse">
                     <li>
                       <a [routerLink]="['/adminmaster/locationregister']">
@@ -106,13 +111,18 @@
                 </div>
               </li>
               
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="javascript:void(0)" data-bs-target="#forms" aria-expanded="false" aria-controls="forms">
+              <li class="nav-item" [class.submenu]="isViewsOpen">
+                <a 
+                  href="javascript:void(0)" 
+                  (click)="toggleMenu('views'); $event.preventDefault()" 
+                  [attr.aria-expanded]="isViewsOpen"
+                  [class.collapsed]="!isViewsOpen"
+                >
                   <i class="fas fa-pen-square"></i>
                   <p>Views</p>
                   <span class="caret"></span>
                 </a>
-                <div class="collapse" id="forms">
+                <div class="collapse" [class.show]="isViewsOpen" id="forms">
                   <ul class="nav nav-collapse">
                     <li>
                       <a [routerLink]="['/adminmaster/millview']">
@@ -137,13 +147,18 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="javascript:void(0)" data-bs-target="#tables" aria-expanded="false" aria-controls="tables">
+              <li class="nav-item" [class.submenu]="isReportsOpen">
+                <a 
+                  href="javascript:void(0)" 
+                  (click)="toggleMenu('reports'); $event.preventDefault()" 
+                  [attr.aria-expanded]="isReportsOpen"
+                  [class.collapsed]="!isReportsOpen"
+                >
                   <i class="fas fa-table"></i>
                   <p>Reports</p>
                   <span class="caret"></span>
                 </a>
-                <div class="collapse" id="tables">
+                <div class="collapse" [class.show]="isReportsOpen" id="tables">
                   <ul class="nav nav-collapse">
                     <li>
                       <a [routerLink]="['/adminmaster/report1']">
