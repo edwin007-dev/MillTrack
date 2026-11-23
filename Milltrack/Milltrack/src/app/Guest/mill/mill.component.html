@@ -1,144 +1,49 @@
-<style>
-  body {
-
-
-    background-color: #fc0254;
-    margin-top: -10px
-  }
-  .container {
-    padding-top: 1px
-  }
-
-  .card {
-    margin-top: 100px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 95%;
-    /* Increased width */
-    max-width: 1100px;
-    /* Increased max width */
-    padding: 10px 30px;
-    box-sizing: border-box;
-  }
-
-  
-
-
-  .card h3 {
-    text-align: center;
-    color: #fc0254;
-    margin-bottom: 10px;
-    font-size: 22px;
-  }
-
-  .form-group {
-    margin-bottom: 8px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-group label {
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 3px;
-  }
-
-  .form-group input,
-  .form-group select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus {
-    border-color:#fc0254;
-    box-shadow: 0 0 3px rgba(245, 115, 109, 0.3);
-  }
-
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .btn:hover {
-    background-color: #007bff;
-  }
-
-  .footer {
-    text-align: center;
-    font-size: 12px;
-    color: #888;
-    margin-top: 10px;
-  }
-</style>
-
-<body>
-
-
-  <div class="container">
-    <div class="card">
-      <h3>Mill Registration</h3>
+<section class="registration-section">
+  <div class="registration-container">
+    <div class="registration-card">
+      <h3 class="registration-title">Mill Registration</h3>
       <form [formGroup]="millgroup">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="millName">Mill Name</label>
               <input type="text" id="millName" placeholder="Enter Mill Name" formControlName="name">
-              <div *ngIf="millgroup.controls['name'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['name'].touched || millgroup.controls['name'].dirty || savestatus) && millgroup.controls['name'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
-         
           </div>
           <div class="col-md-6">
-
             <div class="form-group">
-              <label for="licenseNumber">License Number</label>
-              <input type="tel" id="license" placeholder="Enter License Number" formControlName="license"
-              maxlength="12">
-              <div *ngIf="millgroup.controls['license'].errors?.['required'] " style="color: red;">
+              <label for="license">License Number</label>
+              <input type="tel" id="license" placeholder="Enter License Number" formControlName="license" maxlength="12">
+              <div *ngIf="(millgroup.controls['license'].touched || millgroup.controls['license'].dirty || savestatus) && millgroup.controls['license'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label for="phoneNumber">Phone Number</label>
-              <input type="tel" id="phoneNumber" placeholder="Enter Phone Number" formControlName="phone"
-                maxlength="10">
-                <div *ngIf="millgroup.controls['phone'].errors?.['required'] " style="color: red;">
-                  *Required.
-                </div>
+              <input type="tel" id="phoneNumber" placeholder="Enter Phone Number" formControlName="phone" maxlength="10">
+              <div *ngIf="(millgroup.controls['phone'].touched || millgroup.controls['phone'].dirty || savestatus) && millgroup.controls['phone'].errors?.['required']" class="error-text">
+                *Required.
+              </div>
             </div>
           </div>
-
           <div class="col-md-6">
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" id="email" placeholder="Enter Email" formControlName="email">
-              <div *ngIf="millgroup.controls['email'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['email'].touched || millgroup.controls['email'].dirty || savestatus) && millgroup.controls['email'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
           </div>
         </div>
-
 
         <div class="row">
           <div class="col-md-6">
@@ -146,79 +51,66 @@
               <label for="district">District</label>
               <select id="district" formControlName="district_id" (change)="getlocationbyid()">
                 <option value="">-- Select District --</option>
-                <option *ngFor="let data of districtdata" value="{{data.district_id}}">{{data.districtname}}</option>
+                <option *ngFor="let data of districtdata" [value]="data.district_id">{{data.districtname}}</option>
               </select>
-              <div
-              *ngIf="millgroup.controls['district_id'].invalid && (millgroup.controls['district_id'].dirty || millgroup.controls['district_id'].touched) || validationstatus">
-              <div *ngIf="millgroup.controls['district_id'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['district_id'].touched || millgroup.controls['district_id'].dirty || savestatus) && millgroup.controls['district_id'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
-            </div>
           </div>
-
           <div class="col-md-6">
-
             <div class="form-group">
               <label for="location">Location</label>
               <select id="location" formControlName="location_id">
                 <option value="">-- Select Location --</option>
-                <option *ngFor="let data of locationdata" value="{{data.location_id}}">{{data.locationname}}</option>
+                <option *ngFor="let data of locationdata" [value]="data.location_id">{{data.locationname}}</option>
               </select>
-              <div
-          *ngIf="millgroup.controls['location_id'].invalid && (millgroup.controls['location_id'].dirty || millgroup.controls['location_id'].touched) || validationstatus">
-          <div *ngIf="millgroup.controls['location_id'].errors?.['required'] " style="color: red;">
-            *Required.
-          </div>
-        </div>
+              <div *ngIf="(millgroup.controls['location_id'].touched || millgroup.controls['location_id'].dirty || savestatus) && millgroup.controls['location_id'].errors?.['required']" class="error-text">
+                *Required.
+              </div>
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
               <label for="landmark">Landmark</label>
               <input type="text" id="landmark" placeholder="Enter Landmark" formControlName="landmark">
-              <div *ngIf="millgroup.controls['landmark'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['landmark'].touched || millgroup.controls['landmark'].dirty || savestatus) && millgroup.controls['landmark'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
           </div>
         </div>
+
         <div class="row">
-
           <div class="col-md-6">
-
             <div class="form-group">
               <label for="pincode">Pincode</label>
               <input type="text" id="pincode" placeholder="Enter Pincode" formControlName="pincode" maxlength="6">
-              <div *ngIf="millgroup.controls['pincode'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['pincode'].touched || millgroup.controls['pincode'].dirty || savestatus) && millgroup.controls['pincode'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
           </div>
-
           <div class="col-md-6">
             <div class="form-group">
-              <label for="exampleInputUsername2">Image</label>
-              <input type="file" formControlName="image" (change)="selectFile($event)" class="form-control"
-                id="exampleInputUsername2" />
-                <div *ngIf="millgroup.controls['image'].invalid && (millgroup.controls['image'].dirty || millgroup.controls['image'].touched) || validationstatus">
-                  <div *ngIf="millgroup.controls['image'].errors?.['required'] " style="color: red;">
-                      *Required.
-                  </div>
-    </div>
+              <label for="imageUpload">Image</label>
+              <input type="file" formControlName="image" (change)="selectFile($event)" class="form-control" id="imageUpload">
+              <div *ngIf="(millgroup.controls['image'].touched || millgroup.controls['image'].dirty || savestatus) && millgroup.controls['image'].errors?.['required']" class="error-text">
+                *Required.
+              </div>
             </div>
           </div>
         </div>
+
         <div class="row">
-
           <div class="col-md-6">
-
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text" id="username" placeholder="Enter Username" formControlName="username">
-              <div *ngIf="millgroup.controls['username'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['username'].touched || millgroup.controls['username'].dirty || savestatus) && millgroup.controls['username'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
@@ -227,16 +119,15 @@
             <div class="form-group">
               <label for="password">Password</label>
               <input type="password" id="password" placeholder="Enter Password" formControlName="password">
-              <div *ngIf="millgroup.controls['password'].errors?.['required'] " style="color: red;">
+              <div *ngIf="(millgroup.controls['password'].touched || millgroup.controls['password'].dirty || savestatus) && millgroup.controls['password'].errors?.['required']" class="error-text">
                 *Required.
               </div>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn" (click)="Onsubmit()">Submit</button>
-
+        <button type="submit" class="submit-btn" (click)="Onsubmit()">Submit</button>
       </form>
     </div>
   </div>
-</body>
+</section>

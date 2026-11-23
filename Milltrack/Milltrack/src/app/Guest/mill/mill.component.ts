@@ -40,7 +40,6 @@ pincode:['',Validators.required,],
 image:['',Validators.required],
 username:['',Validators.required],
 password:['',Validators.required],
-count:['',Validators.required],
 category: this.fb.array([])
 })
 
@@ -89,14 +88,11 @@ selectFile(event: any): void {
   }
   // End of upload
   Onsubmit() {
-    
-    // if (!this.millgroup.valid) {
-    //   console.log('hi');
-    //   this.savestatus = true;
-    //   alert('Please Fill in all the fields')
-    //   // alert('Please enter valid data.');
-    //   return;
-    // }
+    this.savestatus = true;
+    if (!this.millgroup.valid) {
+      alert('Please fill in all required fields.');
+      return;
+    }
     
   // fileupload
   if (this.selectedFiles) {

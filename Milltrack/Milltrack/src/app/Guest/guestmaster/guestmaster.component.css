@@ -1,0 +1,7 @@
+.header-section {
+    background-color: #EAEDF2;
+}
+
+.header-section .logo img {
+    mix-blend-mode: multiply;
+}
