@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { DbserviceService } from 'src/app/dbservice.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-payment',
@@ -19,9 +20,9 @@ export class PaymentComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private dbservice: DbserviceService
+    private dbservice: DbserviceService,
+    public imageService: ImageService
   ) {
-    // Get the parameters from the route
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.bookingdetails_id = params.get('bookingdetails_id');
       this.customer_id = params.get('customer_id');
@@ -39,8 +40,13 @@ export class PaymentComponent implements OnInit {
 
     this.paymentform = this.fb.group({
       bookingdetails_id: [this.bookingdetails_id, Validators.required],
+      booking_id: [''],
       login_id: [this.login_id],
-      amount: ['']
+      amount: [''],
+      cardHolder: [''],
+      cardNumber: [''],
+      expiry: [''],
+      cvv: ['']
     });
 
     this.loadPaymentDetails();
@@ -59,9 +65,9 @@ export class PaymentComponent implements OnInit {
           if (this.PaymentArray.length > 0) {
             console.log("✅ Filtered PaymentArray:", this.PaymentArray);
 
-            // ✅ Update the form with the amount
             this.paymentform.patchValue({
-              amount: this.PaymentArray[0].amount
+              amount: this.PaymentArray[0].amount,
+              booking_id: this.PaymentArray[0].booking_id
             });
 
           } else {
@@ -82,10 +88,10 @@ export class PaymentComponent implements OnInit {
     this.dbservice.payment(this.paymentform.value)
       .then((confirmation: any) => {
         if (confirmation.message === "Success") {
-          alert('✅ Payment Successfully Finished');
-          this.router.navigate(['Usermaster/catview']);
+          alert('✅ Payment Successfully Completed!');
+          this.router.navigate(['/customermaster/paymentview']);
         } else {
-          alert('❌ Data not inserted, please check');
+          alert('❌ Payment processing failed, please check');
         }
       })
       .catch((error) => {

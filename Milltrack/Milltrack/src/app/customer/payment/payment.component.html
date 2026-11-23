@@ -1,130 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Form</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Center the payment box */
-        section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding-left: 50px; 
-        }
+<div class="payment-page-wrapper py-5">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-10 text-center">
+        <h2 class="page-title text-uppercase fw-bold mb-2">Secure Checkout</h2>
+        <p class="text-muted mb-0">Review your milling service order and finalize your secure transaction</p>
+        <div class="header-divider mx-auto mt-2"></div>
+      </div>
+    </div>
 
-        /* Stylish card design */
-        .card {
-            width: 450px; /* Reduced width */
-            max-width: 100%;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
-            background: #ffffff;
-            margin-left: 30px;
-        }
-
-        /* Smaller image styling */
-        .card-img-top {
-            height: 180px; /* Reduced height */
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        /* Input fields styling */
-        .form-control {
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-
-        /* Pay button styling */
-        .btn-pay {
-            background: linear-gradient(135deg, #ff7eb3, #ff758c);
-            color: white;
-            font-size: 16px;
-            padding: 10px;
-            width: 100%;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-pay:hover {
-            background: linear-gradient(135deg, #ff638f, #ff3d7b);
-        }
-
-        /* Label adjustments */
-        .form-label {
-            font-weight: bold;
-            color: #333;
-            font-size: 13px;
-        }
-    </style>
-</head>
-<body>
-    <form [formGroup]="paymentform"></form>
-
-    <section>
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-9 col-lg-7 col-xl-5">
-                    <div class="card">
-                        <img src="https://img.freepik.com/free-photo/person-paying-with-debit-card-terminal_23-2149224672.jpg" 
-                             class="card-img-top" alt="Customer paying using a debit card"/>
-                        <div class="card-body">
-                            <h5 class="text-center text-primary mb-3">Complete Your Payment For Service Booking</h5>
-                                <!-- Amount Display -->
-            <h5 class="mb-4">Total: ₹<span *ngIf="PaymentArray.length > 0">{{PaymentArray[0].amount}}</span></h5>
-                        </div>
-                        <div class="rounded-bottom">
-                            <div class="card-body">
-                                <p class="mb-3 text-muted">Enter your card details below:</p>
-
-                                <div class="form-outline mb-3">
-                                    <label class="form-label" for="cardNumber">Card Number</label>
-                                    <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 1234 5678"/>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-6">
-                                        <div class="form-outline">
-                                            <label class="form-label" for="expiryDate">Expiration Date</label>
-                                            <input type="text" id="expiryDate" class="form-control" placeholder="MM/YYYY"/>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-outline">
-                                            <label class="form-label" for="cvv">CVV</label>
-                                            <input type="password" id="cvv" class="form-control" placeholder="CVV"/>
-                                          
-                                        </div>
-                                    </div>
-                                </div>
-                                <button 
-                                type="submit" 
-                                (click)="Onsubmit()" 
-                                class="btn btn-custom" 
-                                style="background: linear-gradient(90deg, #ff7e5f, #feb47b); color: white; border: none; padding: 12px 24px; font-size: 18px; border-radius: 8px;
-                                 box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-                                PAY ₹{{ PaymentArray?.[0]?.amount || '...' }}
-                              </button>
-                              
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row justify-content-center g-4">
+      <!-- Left Column: Payment Form -->
+      <div class="col-lg-7">
+        <div class="card payment-card shadow-sm border-0 mb-4">
+          <div class="card-header py-3 border-bottom d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold header-title">
+              <i class="fa fa-credit-card text-primary me-2"></i> Payment Details
+            </h5>
+            <div class="payment-badges d-flex align-items-center gap-2">
+              <span class="card-pill pill-visa">VISA</span>
+              <span class="card-pill pill-mc">Mastercard</span>
+              <span class="card-pill pill-rupay">RuPay</span>
             </div>
-        </div>
-    </section>
+          </div>
+          <div class="card-body p-4">
+            <form [formGroup]="paymentform" (ngSubmit)="Onsubmit()">
+              <!-- Cardholder Name -->
+              <div class="mb-3">
+                <label class="form-label field-label" for="cardHolder">Cardholder Name</label>
+                <div class="input-group">
+                  <span class="input-group-text field-icon"><i class="fa fa-user"></i></span>
+                  <input type="text" id="cardHolder" class="form-control field-input" placeholder="e.g. Edwin Benson" formControlName="cardHolder">
+                </div>
+              </div>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+              <!-- Card Number -->
+              <div class="mb-3">
+                <label class="form-label field-label" for="cardNumber">Card Number</label>
+                <div class="input-group">
+                  <span class="input-group-text field-icon"><i class="fa fa-credit-card"></i></span>
+                  <input type="text" id="cardNumber" class="form-control field-input" placeholder="4532 •••• •••• 8892" maxlength="19" formControlName="cardNumber">
+                </div>
+              </div>
+
+              <!-- Expiry & CVV -->
+              <div class="row mb-4">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="form-label field-label" for="expiry">Expiry Date</label>
+                  <div class="input-group">
+                    <span class="input-group-text field-icon"><i class="fa fa-calendar"></i></span>
+                    <input type="text" id="expiry" class="form-control field-input" placeholder="MM/YY" maxlength="5" formControlName="expiry">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label field-label" for="cvv">CVV / CVC</label>
+                  <div class="input-group">
+                    <span class="input-group-text field-icon"><i class="fa fa-lock"></i></span>
+                    <input type="password" id="cvv" class="form-control field-input" placeholder="•••" maxlength="4" formControlName="cvv">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Note -->
+              <div class="security-box d-flex align-items-center mb-4 p-3">
+                <i class="fa fa-shield fa-2x text-success me-3"></i>
+                <div>
+                  <strong class="d-block text-dark">Guaranteed 256-Bit SSL Encryption</strong>
+                  <span class="text-muted small">Your personal and payment credentials are processed securely.</span>
+                </div>
+              </div>
+
+              <!-- Pay Button -->
+              <button type="submit" class="btn btn-pay-now w-100 py-3 fw-bold">
+                <i class="fa fa-lock me-2"></i> Pay ₹{{ PaymentArray?.[0]?.amount || '...' }} Securely
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Order Summary (No sticky-top to avoid header collision) -->
+      <div class="col-lg-5">
+        <div class="card summary-card shadow-sm border-0 mb-4">
+          <div class="card-header summary-header py-3">
+            <h5 class="mb-0 fw-bold summary-title">
+              <i class="fa fa-receipt me-2"></i> Service Order Summary
+            </h5>
+          </div>
+          <div class="card-body p-4" *ngIf="PaymentArray && PaymentArray.length > 0">
+            <!-- Service Preview -->
+            <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+              <img [src]="imageService.getServiceImageUrl(PaymentArray[0]?.subcatname, PaymentArray[0]?.image)"
+                   (error)="imageService.handleImageError($event, PaymentArray[0]?.image, PaymentArray[0]?.subcatname)"
+                   alt="{{ PaymentArray[0]?.subcatname }}"
+                   class="summary-img rounded shadow-sm me-3">
+              <div class="flex-grow-1">
+                <h5 class="fw-bold mb-1 service-name text-dark">{{ PaymentArray[0]?.subcatname }}</h5>
+                <span class="category-badge">{{ PaymentArray[0]?.categoryname }}</span>
+              </div>
+            </div>
+
+            <!-- Booking Specifics -->
+            <ul class="list-unstyled mb-4 summary-list">
+              <li>
+                <span class="label-text">Customer Name:</span>
+                <strong class="value-text">{{ PaymentArray[0]?.name }}</strong>
+              </li>
+              <li>
+                <span class="label-text">Quantity & Unit:</span>
+                <strong class="value-text">{{ PaymentArray[0]?.quantity }} {{ PaymentArray[0]?.unit }}</strong>
+              </li>
+              <li *ngIf="PaymentArray[0]?.time">
+                <span class="label-text">Scheduled Slot:</span>
+                <strong class="value-text">{{ PaymentArray[0]?.time }}</strong>
+              </li>
+              <li *ngIf="PaymentArray[0]?.required_date">
+                <span class="label-text">Required Date:</span>
+                <strong class="value-text">{{ PaymentArray[0]?.required_date | date:'dd-MM-yyyy' }}</strong>
+              </li>
+            </ul>
+
+            <!-- Pricing Breakdown -->
+            <div class="pricing-breakdown pt-2">
+              <div class="d-flex justify-content-between py-1 text-muted">
+                <span>Service Fee</span>
+                <span class="fw-semibold text-dark">₹{{ PaymentArray[0]?.amount | number:'1.2-2' }}</span>
+              </div>
+              <div class="d-flex justify-content-between py-1 text-muted">
+                <span>Processing & Platform GST</span>
+                <span class="text-success fw-bold">FREE</span>
+              </div>
+              <div class="d-flex justify-content-between py-2 mt-2 border-top border-bottom total-row">
+                <span class="fs-5 fw-bold text-dark">Total Amount</span>
+                <span class="fs-5 fw-bold text-primary">₹{{ PaymentArray[0]?.amount | number:'1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div class="card-body p-4 text-center text-muted" *ngIf="!PaymentArray || PaymentArray.length === 0">
+            <i class="fa fa-spinner fa-spin fa-2x mb-3 text-primary"></i>
+            <p class="mb-0">Loading payment details...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
